@@ -7,13 +7,22 @@ public class N206 {
     }
     public ListNode n206_digui(ListNode head) {
         //如何用递归实现？
-        //递归实现一次后，应该完成一次反转，并移动链表指针
-        //0->1->2<-3<-4 现在我想让2指向1，如何操作？
-        //1.next.next=1
-        ListNode newHead=n206_digui(head.next);
-        head.next.next=head;
-        head.next=null;
-        return newHead;
+        //每次操作的都是pre和cur
+        ListNode cur=head;
+        ListNode pre=null;
+        //递归外部启动初始化
+        return digui(pre,cur);
+
+    }
+    public ListNode digui(ListNode pre,ListNode cur)
+    {
+        if(cur==null)return pre;
+        ListNode temp=cur.next;
+        cur.next=pre;
+//        pre=cur;
+//        cur=temp;递归的更新并不是手动指定，而是传参更新
+        return digui(cur,temp);
+
     }
     public ListNode n206_diedai(ListNode head){
         ListNode cur=head;//记录当前节点
